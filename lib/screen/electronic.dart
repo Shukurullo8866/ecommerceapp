@@ -21,7 +21,7 @@ class _ElectronicState extends State<Electronic> {
 
 
   Future<List<Model>> getData() async {
-    String url = "https://fakestoreapi.com/products";
+    String url = "https://fakestoreapi.com/products/";
 
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -62,7 +62,8 @@ class _ElectronicState extends State<Electronic> {
                 }
                 if (snapshot.hasData) {
                   List<Model?>? users = snapshot.data;
-                if(Category.CategoryList == 0)
+                  print(snapshot.data![0].category);
+                  
                   return Container(
                   
                     child: GridView.builder(
@@ -73,7 +74,8 @@ class _ElectronicState extends State<Electronic> {
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                         itemCount: users!.length,
                         itemBuilder: (context, index) {
-                          return stuff(
+                       
+                         return stuff(
                               context,
                           
                               users[index]?.id ?? 0,
@@ -83,12 +85,16 @@ class _ElectronicState extends State<Electronic> {
                               users[index]?.category ?? "NO",
                               users[index]?.image ?? "NO"
                               );
+
+                          
                         }),
                            
                   );
                   
                 }
-                return Container();
+                return Container(
+                color: Colors.red,
+                );
               }),
       ));
     
@@ -142,7 +148,7 @@ class _ElectronicState extends State<Electronic> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Container(
-                child: Text(price.toString(),maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text("\$ $price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
           ],

@@ -1,5 +1,6 @@
 
 import 'package:ecommerceapp/data/model/category_model.dart';
+import 'package:ecommerceapp/screen/electronic.dart';
 import 'package:ecommerceapp/screen/home_page.dart';
 import 'package:flutter/material.dart';
 
@@ -49,7 +50,7 @@ class _TabBarPageState extends State<TabBarPage> {
         ),
         body: TabBarView(children: [
           HomePage(),
-          Container(),
+          Electronic(),
           Container(),
           Container(),
           Container(),
