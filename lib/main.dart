@@ -1,5 +1,6 @@
-import 'package:ecommerceapp/screen/tab_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:ecommerceapp/screen/tab_bar.dart';
+import 'package:ecommerceapp/HomePage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: TabBarPage(),
+
     );
   }
 }
