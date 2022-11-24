@@ -1,26 +1,24 @@
-import 'dart:ffi';
 
 import 'dart:convert';
+import 'package:ecommerceapp/data/model/category_model.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class Womens_clothiz extends StatefulWidget {
+  const Womens_clothiz({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<Womens_clothiz> createState() => _Womens_clothizState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _Womens_clothizState extends State<Womens_clothiz> {
   Future<List<Model>?>? getResult;
 
 
   Future<List<Model>> getData() async {
-    String url = "https://fakestoreapi.com/products";
+    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[3]}";
 
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -61,37 +59,39 @@ class _HomePageState extends State<HomePage> {
                 }
                 if (snapshot.hasData) {
                   List<Model?>? users = snapshot.data;
-            
-                  return GestureDetector(
-                    onTap: () {
+                  print(snapshot.data![0].category);
+                  
+                  return Container(
+                  
+                    child: GridView.builder(
                       
-                    },
-                    child: Container(
-                    
-                      child: GridView.builder(
-                        scrollDirection: Axis.vertical,
-                        
-                        shrinkWrap: true,
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                          itemCount: users!.length,
-                          itemBuilder: (context, index) {
-                            return stuff(
-                                context,
-                            
-                                users[index]?.id ?? 0,
-                                users[index]?.title ?? "NO",
-                                users[index]?.price ?? 0.0,
-                                users[index]?.description ?? "NO",
-                                users[index]?.category ?? "NO",
-                                users[index]?.image ?? "NO"
-                                );
-                          }),
-                             
-                    ),
+                      scrollDirection: Axis.vertical,
+                      
+                      shrinkWrap: true,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                        itemCount: users!.length,
+                        itemBuilder: (context, index) {
+                       
+                         return stuff(
+                              context,
+                          
+                              users[index]?.id ?? 0,
+                              users[index]?.title ?? "NO",
+                              users[index]?.price ?? 0.0,
+                              users[index]?.description ?? "NO",
+                              users[index]?.category ?? "NO",
+                              users[index]?.image ?? "NO"
+                              );
+
+                          
+                        }),
+                           
                   );
                   
                 }
-                return Container();
+                return Container(
+                color: Colors.red,
+                );
               }),
       ));
     
@@ -100,7 +100,6 @@ class _HomePageState extends State<HomePage> {
   stuff(context,id,title,price,description,category,image){
     var height1 = MediaQuery.of(context).size.height;
     var width1 = MediaQuery.of(context).size.width;
-    
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -146,7 +145,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Container(
-                child: Text("\$ $price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text("$price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
           ],
