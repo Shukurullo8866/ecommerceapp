@@ -1,4 +1,5 @@
 import 'package:ecommerceapp/screen/tab_bar.dart';
+import 'package:ecommerceapp/screen/tab_bar_view.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
         
         primarySwatch: Colors.blue,
       ),
-      home: TabBarPage(),
+      home: TabBArViewPage(),
     );
   }
 }
