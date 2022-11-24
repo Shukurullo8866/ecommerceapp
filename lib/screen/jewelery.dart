@@ -20,7 +20,7 @@ class _JeweleryState extends State<Jewelery> {
 
 
   Future<List<Model>> getData() async {
-    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[2]}";
+    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[1]}";
 
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
