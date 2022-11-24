@@ -21,7 +21,7 @@ class _ElectronicState extends State<Electronic> {
 
 
   Future<List<Model>> getData() async {
-    String url = "https://fakestoreapi.com/products/";
+    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[0]}";
 
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
