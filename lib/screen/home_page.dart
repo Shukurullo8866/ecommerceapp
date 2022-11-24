@@ -62,27 +62,32 @@ class _HomePageState extends State<HomePage> {
                 if (snapshot.hasData) {
                   List<Model?>? users = snapshot.data;
             
-                  return Container(
-                  
-                    child: GridView.builder(
-                      scrollDirection: Axis.vertical,
+                  return GestureDetector(
+                    onTap: () {
                       
-                      shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-                        itemCount: users!.length,
-                        itemBuilder: (context, index) {
-                          return stuff(
-                              context,
-                          
-                              users[index]?.id ?? 0,
-                              users[index]?.title ?? "NO",
-                              users[index]?.price ?? 0.0,
-                              users[index]?.description ?? "NO",
-                              users[index]?.category ?? "NO",
-                              users[index]?.image ?? "NO"
-                              );
-                        }),
-                           
+                    },
+                    child: Container(
+                    
+                      child: GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        
+                        shrinkWrap: true,
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                          itemCount: users!.length,
+                          itemBuilder: (context, index) {
+                            return stuff(
+                                context,
+                            
+                                users[index]?.id ?? 0,
+                                users[index]?.title ?? "NO",
+                                users[index]?.price ?? 0.0,
+                                users[index]?.description ?? "NO",
+                                users[index]?.category ?? "NO",
+                                users[index]?.image ?? "NO"
+                                );
+                          }),
+                             
+                    ),
                   );
                   
                 }
@@ -95,6 +100,7 @@ class _HomePageState extends State<HomePage> {
   stuff(context,id,title,price,description,category,image){
     var height1 = MediaQuery.of(context).size.height;
     var width1 = MediaQuery.of(context).size.width;
+    
     return Padding(
       padding: const EdgeInsets.all(12),
       child: Container(
@@ -140,7 +146,7 @@ class _HomePageState extends State<HomePage> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Container(
-                child: Text(price.toString(),maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text("\$ $price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
           ],

@@ -1,7 +1,4 @@
 
-
-import 'dart:ffi';
-
 import 'dart:convert';
 import 'package:ecommerceapp/data/model/category_model.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
@@ -11,19 +8,19 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class Electronic extends StatefulWidget {
-  const Electronic({super.key});
+class Jewelery extends StatefulWidget {
+  const Jewelery({super.key});
 
   @override
-  State<Electronic> createState() => _ElectronicState();
+  State<Jewelery> createState() => _JeweleryState();
 }
 
-class _ElectronicState extends State<Electronic> {
+class _JeweleryState extends State<Jewelery> {
   Future<List<Model>?>? getResult;
 
 
   Future<List<Model>> getData() async {
-    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[0]}";
+    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[2]}";
 
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -64,7 +61,7 @@ class _ElectronicState extends State<Electronic> {
                 }
                 if (snapshot.hasData) {
                   List<Model?>? users = snapshot.data;
-                  print(snapshot.data![0].category);
+                  print(snapshot.data![1].category);
                   
                   return Container(
                   
@@ -160,4 +157,3 @@ class _ElectronicState extends State<Electronic> {
     );
 }
 }
-

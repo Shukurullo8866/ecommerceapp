@@ -1,29 +1,24 @@
 
-
-import 'dart:ffi';
-
 import 'dart:convert';
 import 'package:ecommerceapp/data/model/category_model.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 
-class Electronic extends StatefulWidget {
-  const Electronic({super.key});
+class Womens_clothiz extends StatefulWidget {
+  const Womens_clothiz({super.key});
 
   @override
-  State<Electronic> createState() => _ElectronicState();
+  State<Womens_clothiz> createState() => _Womens_clothizState();
 }
 
-class _ElectronicState extends State<Electronic> {
+class _Womens_clothizState extends State<Womens_clothiz> {
   Future<List<Model>?>? getResult;
 
 
   Future<List<Model>> getData() async {
-    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[0]}";
+    String url = "https://fakestoreapi.com/products/category/${Category.CategoryList[3]}";
 
     var response = await http.get(Uri.parse(url));
     if (response.statusCode == 200) {
@@ -150,7 +145,7 @@ class _ElectronicState extends State<Electronic> {
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Container(
-                child: Text("\$ $price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text("$price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
           ],
@@ -160,4 +155,3 @@ class _ElectronicState extends State<Electronic> {
     );
 }
 }
-
