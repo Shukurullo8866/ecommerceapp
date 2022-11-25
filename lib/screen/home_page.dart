@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:ecommerceapp/data/database/local_database.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -59,8 +60,9 @@ class _HomePageState extends State<HomePage> {
                 child: GridView.builder(
                     scrollDirection: Axis.vertical,
                     shrinkWrap: true,
-                    gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
                     itemCount: users!.length,
                     itemBuilder: (context, index) {
                       return stuff(
@@ -85,69 +87,84 @@ class _HomePageState extends State<HomePage> {
 
     return Padding(
       padding: const EdgeInsets.all(12),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow:const [
-              BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(1, 1),
-                  blurRadius: 2,
-                  spreadRadius: 2)
-            ],
-            borderRadius: BorderRadius.circular(15)),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 100,
-                width: 100,
-                child: Image.network(
-                  image,
-                  width: 220,
+      child: GestureDetector(
+        onTap: () {
+          var modelToDB = Model(
+              id: id,
+              title: title,
+              price: price,
+              description: description,
+              category: category,
+              image: image);
+          setState(() {
+            LocalDatabase.insertToDatabase(modelToDB);
+
+          });
+        },
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(1, 1),
+                    blurRadius: 2,
+                    spreadRadius: 2)
+              ],
+              borderRadius: BorderRadius.circular(15)),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              SizedBox(height: height1 * 0.01),
-              Center(
-                child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      title,
-                      maxLines: 1,
-                      style:const TextStyle(fontWeight: FontWeight.w700),
-                    )),
-              ),
-              SizedBox(height: height1 * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Container(
-                        child: Text(
-                      category,
-                      maxLines: 1,
-                      style:const TextStyle(
-                          fontWeight: FontWeight.w700, color: Colors.black54),
-                    )),
+                Container(
+                  height: 100,
+                  width: 100,
+                  child: Image.network(
+                    image,
+                    width: 220,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Container(
-                        child: Text(
-                      "\$ $price",
-                      maxLines: 1,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, color: Colors.black54),
-                    )),
-                  ),
-                ],
-              ),
-            ]),
+                ),
+                SizedBox(height: height1 * 0.01),
+                Center(
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        title,
+                        maxLines: 1,
+                        style: const TextStyle(fontWeight: FontWeight.w700),
+                      )),
+                ),
+                SizedBox(height: height1 * 0.01),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Container(
+                          child: Text(
+                        category,
+                        maxLines: 1,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, color: Colors.black54),
+                      )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                          child: Text(
+                        "\$ $price",
+                        maxLines: 1,
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w700, color: Colors.black54),
+                      )),
+                    ),
+                  ],
+                ),
+              ]),
+        ),
       ),
     );
   }

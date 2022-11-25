@@ -1,3 +1,4 @@
+import 'package:ecommerceapp/screen/Cart_page.dart';
 import 'package:ecommerceapp/screen/tab_bar.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class _TabBArViewPageState extends State<TabBArViewPage> {
    List<Widget>  _page = [
    
     TabBarPage(),
-    Container(),
+    Cart_page(),
     
   ];
 
