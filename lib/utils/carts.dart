@@ -1,6 +1,7 @@
 // ignore_for_file: non_constant_identifier_names
 
-import '../data/database.dart/local_database.dart';
+import 'package:ecommerceapp/data/database/local_database.dart';
+
 import '../data/model/product_model.dart';
 
 List<Model> cart_items = [];
