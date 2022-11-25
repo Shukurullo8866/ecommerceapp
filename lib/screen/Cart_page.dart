@@ -26,7 +26,8 @@ class _Cart_pageState extends State<Cart_page> {
                   child: const Center(child: Text('Empty')),
                 );
               }
-              return ListView.builder(
+              return PageView.builder(
+                scrollDirection: Axis.horizontal,
                 itemCount: snapshot.data?.length ?? 0,
                 itemBuilder: (context, index) {
                   return TaskItem(
@@ -62,97 +63,141 @@ class TaskItem extends StatefulWidget {
 class _TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4), color: Colors.white),
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.all(12),
-          child: Image.network(
-            widget.model!.image!,
-            fit: BoxFit.cover,
-          ),
-        ),
-        const SizedBox(
-          height: 12,
-        ),
-        Container(
-          width: 328,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4), color: Colors.white),
-          padding: const EdgeInsets.only(top: 2, left: 8, right: 8, bottom: 10),
-          margin: const EdgeInsets.all(12),
-          child: Text(
-            widget.model!.title!,
-            style: TextStyle(
-                color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(12),
-              color: Colors.deepPurple.shade900),
-          padding: const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 8),
-          margin: const EdgeInsets.all(12),
-          child: Text(
-            widget.model!.category!,
-            style: TextStyle(fontSize: 18, color: Colors.white),
-          ),
-        ),
-        Container(
-          width: 328,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(4), color: Colors.grey),
-          padding: const EdgeInsets.only(top: 2, left: 8, right: 8, bottom: 10),
-          margin: const EdgeInsets.all(12),
-          child: Text(widget.model!.description!),
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+    return Container(
+      height: MediaQuery.of(context).size.height,
+      child: Center(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('\$${widget.model!.price.toString()}',style:const TextStyle(color: Colors.green,fontWeight: FontWeight.bold,fontSize: 22),),
-            const SizedBox(width: 30,),
+            Container(
+              height: 300,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4), color: Colors.white),
+              padding: const EdgeInsets.all(10),
+              margin: const EdgeInsets.all(12),
+              child: Image.network(
+                widget.model!.image!,
+                fit: BoxFit.cover,
+              ),
+            ),
+            const SizedBox(
+              height: 12,
+            ),
+            Container(
+              width: 328,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4), color: Colors.white),
+              padding:
+                  const EdgeInsets.only(top: 2, left: 8, right: 8, bottom: 10),
+              margin: const EdgeInsets.all(12),
+              child: Text(
+                widget.model!.title!,
+                style: TextStyle(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18),
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.deepPurple.shade900),
+              padding:
+                  const EdgeInsets.only(top: 8, left: 8, right: 8, bottom: 8),
+              margin: const EdgeInsets.all(12),
+              child: Text(
+                widget.model!.category!,
+                style: TextStyle(fontSize: 18, color: Colors.white),
+              ),
+            ),
+            Container(
+              width: 328,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(4), color: Colors.grey),
+              padding:
+                  const EdgeInsets.only(top: 2, left: 8, right: 8, bottom: 10),
+              margin: const EdgeInsets.all(12),
+              child: Text(widget.model!.description!),
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(50),
-                      color: Colors.deepPurple),
-                  child: const Text(
-                    '-',
-                    style: TextStyle(fontSize: 33, color: Colors.blue),
-                  ),
+                Text(
+                  '\$${widget.model!.price.toString()}',
+                  style: const TextStyle(
+                      color: Colors.green,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22),
                 ),
                 const SizedBox(
-                  width: 4,
+                  width: 30,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: Colors.deepPurple),
-                  child: Text(
-                    widget.model!.count.toString(),
-                    style: const TextStyle(fontSize: 33, color: Colors.white),
-                  ),
-                ),
-                const SizedBox(
-                  width: 4,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(4),
-                      color: Colors.deepPurple),
-                  child: const Text(
-                    '+',
-                    style: TextStyle(fontSize: 33, color: Colors.red),
-                  ),
+                IconButton(
+                    onPressed: () async {
+                      showDialog(context: context,
+                      builder: (context)=>AlertDialog(
+                        backgroundColor: Colors.grey,
+                        
+                      )
+                      );
+                      await LocalDatabase.deleteTaskById(
+                          widget.model!.id!.toInt());
+                      setState(() {});
+                    },
+                    icon: const Icon(
+                      Icons.delete,
+                      color: Colors.red,
+                      size: 30,
+                    )),
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(50),
+                            color: Colors.deepPurple),
+                        child: const Text(
+                          '-',
+                          style: TextStyle(fontSize: 33, color: Colors.blue),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(4),
+                          color: Colors.deepPurple),
+                      child: Text(
+                        widget.model!.count.toString(),
+                        style:
+                            const TextStyle(fontSize: 33, color: Colors.white),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: Colors.deepPurple),
+                        child: const Text(
+                          '+',
+                          style: TextStyle(fontSize: 33, color: Colors.red),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ],
-            ),
+            )
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }
