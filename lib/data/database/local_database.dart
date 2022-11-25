@@ -1,6 +1,5 @@
 import 'package:ecommerceapp/data/model/product_model.dart';
 import 'package:sqflite/sqflite.dart';
-
 class LocalDatabase {
   static String tablename = "myCart";
   static LocalDatabase getInstance = LocalDatabase._init();
