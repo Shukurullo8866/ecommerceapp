@@ -1,10 +1,12 @@
 import 'package:ecommerceapp/data/model/product_model.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:path/path.dart';
+
 class LocalDatabase {
   static String tablename = "myCart";
   static LocalDatabase getInstance = LocalDatabase._init();
-
   Database? _database;
+
   LocalDatabase._init();
 
   Future<Database> getDb() async {
@@ -17,13 +19,15 @@ class LocalDatabase {
 
   Future<Database> _initDb(String fileName) async {
     var dbPath = await getDatabasesPath();
-    String path = dbPath + fileName;
+    String path = join(dbPath,fileName);
 
     Database database = await openDatabase(path, version: 1,
         onCreate: (Database db, int version) async {
       String idType = "INTEGER PRIMARY KEY AUTOINCREMENT";
       String textType = "TEXT";
       String intType = "INTEGER";
+      String doubleType = "REAL";
+
       String boolType = "INTEGER";
       await db.execute('''
       Create table $tablename(
@@ -31,7 +35,7 @@ class LocalDatabase {
             id $intType,
             count $intType,
             title $textType,
-            price $intType
+            price $doubleType,
             category $textType,
             image $textType,
             description $textType
@@ -46,20 +50,21 @@ class LocalDatabase {
     var database = await getInstance.getDb();
     int id = await database.insert(tablename, product.toJson());
     print("HAMMASI YAXSHI");
+    print("HAMMASI YAXSHI");
     return product.copyWith(id: id);
   }
 
   static Future<List<Model>> getList() async {
     var database = await getInstance.getDb();
     var listOfTodos = await database.query(tablename, columns: [
-            "_id", 
-            "id", 
-            "count", 
-            "title", 
-            "price", 
-            "category", 
-            "image", 
-            "description", 
+            "_id",
+            "id",
+            "count",
+            "title",
+            "price",
+            "category",
+            "image",
+            "description",
     ]);
     List<Model> list = listOfTodos.map((e) => Model.fromJson(e)).toList();
 

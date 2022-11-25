@@ -26,32 +26,37 @@ class _TabBarPageState extends State<TabBarPage> {
         
         appBar: AppBar(
           
-          title: Text(
-            'username',
+          title:const Text(
+            'E-Commerce_APP',
           ),
           
           
           bottom: TabBar(
-            indicatorColor: Colors.black,
+            unselectedLabelColor: Colors.white,
+            labelColor: Colors.deepPurple,
+            isScrollable: true,
+
+
+            indicatorColor: Colors.deepPurple,
             tabs: [
-            Tab(
-              icon: Text('All')
+              const  Tab(
+              icon: Text('All',style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[0])
+              icon: Text(Category.CategoryList[0],style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[1])
+              icon: Text(Category.CategoryList[1],style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[2])
+              icon: Text(Category.CategoryList[2],style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[3])
+              icon: Text(Category.CategoryList[3],style: TextStyle(fontSize: 20),)
             ),
           ]),
         ),
-        body: TabBarView(children: [
+        body:const TabBarView(children: [
           HomePage(),
           Electronic(),
           Jewelery(),
