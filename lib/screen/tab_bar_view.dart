@@ -1,7 +1,5 @@
 import 'package:ecommerceapp/screen/tab_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
 class TabBArViewPage extends StatefulWidget {
    TabBArViewPage({super.key});
@@ -13,7 +11,7 @@ class TabBArViewPage extends StatefulWidget {
 class _TabBArViewPageState extends State<TabBArViewPage> {
   int Index = 0;
 
-   List<Widget> _page = [
+   List<Widget>  _page = [
    
     TabBarPage(),
     Container(),
@@ -37,7 +35,7 @@ class _TabBArViewPageState extends State<TabBArViewPage> {
         unselectedItemColor: Colors.black,
         backgroundColor: Colors.blue,
         
-        items: [
+        items: const[
           BottomNavigationBarItem(icon: Icon(Icons.home, size: 30,),
           label: ''),
           BottomNavigationBarItem(icon: Icon(Icons.shopping_basket_rounded, size: 30,),

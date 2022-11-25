@@ -51,7 +51,7 @@ class _MensState extends State<Mens> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
                     height: MediaQuery.of(context).size.height,
-                    child: Center(child: CircularProgressIndicator()),
+                    child:const Center(child: CircularProgressIndicator()),
                   );
                 }
                 if (snapshot.hasError) {
@@ -105,7 +105,7 @@ class _MensState extends State<Mens> {
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
-            boxShadow: [BoxShadow(
+            boxShadow:const [BoxShadow(
               color: Colors.grey,
               offset: Offset(1,1),
               blurRadius: 2,
@@ -117,7 +117,7 @@ class _MensState extends State<Mens> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-        SizedBox(height: 10,),
+          const SizedBox(height: 10,),
         Container(
           height: 100,
           width: 100,
@@ -129,7 +129,7 @@ class _MensState extends State<Mens> {
         Center(
           child: Container(
             alignment: Alignment.center,
-            child: Text(title,maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700),)
+            child: Text(title,maxLines: 1,style:const TextStyle(fontWeight: FontWeight.w700),)
           ),
         ),
         SizedBox(height:height1*0.01),
@@ -139,13 +139,13 @@ class _MensState extends State<Mens> {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Container(
-                child: Text(category,maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text(category,maxLines: 1,style:const TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Container(
-                child: Text("\$ $price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text("\$ $price",maxLines: 1,style:const TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
           ],

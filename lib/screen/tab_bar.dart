@@ -26,15 +26,19 @@ class _TabBarPageState extends State<TabBarPage> {
         
         appBar: AppBar(
           
-          title: Text(
-            'username',
+          title:const Text(
+            'E-Commerce_APP',
           ),
           
           
           bottom: TabBar(
-            indicatorColor: Colors.black,
+            unselectedLabelColor: Colors.black,
+            labelColor: Colors.deepPurple,
+
+
+            indicatorColor: Colors.deepPurple,
             tabs: [
-            Tab(
+              const  Tab(
               icon: Text('All')
             ),
             Tab(
@@ -51,7 +55,7 @@ class _TabBarPageState extends State<TabBarPage> {
             ),
           ]),
         ),
-        body: TabBarView(children: [
+        body:const TabBarView(children: [
           HomePage(),
           Electronic(),
           Jewelery(),

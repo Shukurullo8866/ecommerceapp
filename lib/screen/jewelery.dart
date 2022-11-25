@@ -3,10 +3,7 @@ import 'dart:convert';
 import 'package:ecommerceapp/data/model/category_model.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:http/http.dart' as http;
-import 'package:http/http.dart';
 
 class Jewelery extends StatefulWidget {
   const Jewelery({super.key});
@@ -53,7 +50,7 @@ class _JeweleryState extends State<Jewelery> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Container(
                     height: MediaQuery.of(context).size.height,
-                    child: Center(child: CircularProgressIndicator()),
+                    child: const Center(child: CircularProgressIndicator()),
                   );
                 }
                 if (snapshot.hasError) {
@@ -70,7 +67,7 @@ class _JeweleryState extends State<Jewelery> {
                       scrollDirection: Axis.vertical,
                       
                       shrinkWrap: true,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
+                        gridDelegate:const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
                         itemCount: users!.length,
                         itemBuilder: (context, index) {
                        
@@ -107,7 +104,7 @@ class _JeweleryState extends State<Jewelery> {
       child: Container(
         decoration: BoxDecoration(
             color: Colors.white,
-            boxShadow: [BoxShadow(
+            boxShadow:const [BoxShadow(
               color: Colors.grey,
               offset: Offset(1,1),
               blurRadius: 2,
@@ -119,7 +116,7 @@ class _JeweleryState extends State<Jewelery> {
         mainAxisAlignment: MainAxisAlignment.start,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-        SizedBox(height: 10,),
+          const SizedBox(height: 10,),
         Container(
           height: 100,
           width: 100,
@@ -131,7 +128,7 @@ class _JeweleryState extends State<Jewelery> {
         Center(
           child: Container(
             alignment: Alignment.center,
-            child: Text(title,maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700),)
+            child: Text(title,maxLines: 1,style:const TextStyle(fontWeight: FontWeight.w700),)
           ),
         ),
         SizedBox(height:height1*0.01),
@@ -141,13 +138,13 @@ class _JeweleryState extends State<Jewelery> {
             Padding(
               padding: const EdgeInsets.only(left: 10),
               child: Container(
-                child: Text(category,maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text(category,maxLines: 1,style:const TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(right: 10),
               child: Container(
-                child: Text("\$ $price",maxLines: 1,style: TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
+                child: Text("\$ $price",maxLines: 1,style:const TextStyle(fontWeight: FontWeight.w700,color: Colors.black54),)
               ),
             ),
           ],
