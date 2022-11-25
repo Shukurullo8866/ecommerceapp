@@ -96,13 +96,13 @@ class _SecondPageState extends State<SecondPage> {
                               height: 130,
                               width: 130,
                               child: Image.network(
-                                data[index]!.imageUrl.toString(),
+                                data[index]!.image.toString(),
                               ),
                             ),
                           ),
                           Center(
                             child: Text(
-                              data[index]!.name.toString(),
+                              data[index]!.category.toString(),
                               style: const TextStyle(
                                   fontSize: 18, fontWeight: FontWeight.w600),
                             ),

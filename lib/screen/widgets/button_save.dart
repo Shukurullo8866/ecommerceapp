@@ -1,8 +1,8 @@
+import 'package:ecommerceapp/data/database/local_database.dart';
 import 'package:ecommerceapp/utils/carts.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../data/database.dart/local_database.dart';
 import '../../data/model/product_model.dart';
 
 class ItemWidget extends StatefulWidget {
