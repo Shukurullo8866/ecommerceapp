@@ -31,7 +31,11 @@ class _Cart_pageState extends State<Cart_page> {
                 itemCount: snapshot.data?.length ?? 0,
                 itemBuilder: (context, index) {
                   return TaskItem(
+                    onDeleted:()=>setState(() {
+
+                    }),
                     model: snapshot.data?[index],
+
                   );
                 },
               );
@@ -50,9 +54,11 @@ class _Cart_pageState extends State<Cart_page> {
 
 class TaskItem extends StatefulWidget {
   Model? model;
+  final VoidCallback onDeleted;
 
   TaskItem({
     Key? key,
+    required this.onDeleted,
     required this.model,
   }) : super(key: key);
 
@@ -93,7 +99,7 @@ class _TaskItemState extends State<TaskItem> {
               margin: const EdgeInsets.all(12),
               child: Text(
                 widget.model!.title!,
-                style: TextStyle(
+                style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
                     fontSize: 18),
@@ -138,11 +144,42 @@ class _TaskItemState extends State<TaskItem> {
                       showDialog(
                           context: context,
                           builder: (context) => AlertDialog(
-                                backgroundColor: Colors.grey,
+                                title: const Text('Basic dialog title'),
+                                content: const Text(
+                                    'A dialog is a type of modal window that\n'
+                                    'appears in front of app content to\n'
+                                    'provide critical information, or prompt\n'
+                                    'for a decision to be made.'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    child: const Text('Disable'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    style: TextButton.styleFrom(
+                                      textStyle: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge,
+                                    ),
+                                    child: const Text('Enable'),
+                                    onPressed: () {
+                                      widget.onDeleted.call();
+                                      setState(() async {
+                                        await LocalDatabase.deleteTaskById(
+                                            widget.model!.id!.toInt());
+                                        Navigator.of(context).pop();
+                                      });
+                                    },
+                                  ),
+                                ],
                               ));
-                      await LocalDatabase.deleteTaskById(
-                          widget.model!.id!.toInt());
-                      setState(() {});
                     },
                     icon: const Icon(
                       Icons.delete,
