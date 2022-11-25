@@ -63,6 +63,7 @@ class TaskItem extends StatefulWidget {
 class _TaskItemState extends State<TaskItem> {
   @override
   Widget build(BuildContext context) {
+    var a = 0;
     return Container(
       height: MediaQuery.of(context).size.height,
       child: Center(
@@ -134,12 +135,11 @@ class _TaskItemState extends State<TaskItem> {
                 ),
                 IconButton(
                     onPressed: () async {
-                      showDialog(context: context,
-                      builder: (context)=>AlertDialog(
-                        backgroundColor: Colors.grey,
-                        
-                      )
-                      );
+                      showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                                backgroundColor: Colors.grey,
+                              ));
                       await LocalDatabase.deleteTaskById(
                           widget.model!.id!.toInt());
                       setState(() {});
@@ -152,7 +152,13 @@ class _TaskItemState extends State<TaskItem> {
                 Row(
                   children: [
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          if (a != 0) {
+                            a--;
+                          }
+                        });
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(50),
@@ -171,7 +177,7 @@ class _TaskItemState extends State<TaskItem> {
                           borderRadius: BorderRadius.circular(4),
                           color: Colors.deepPurple),
                       child: Text(
-                        widget.model!.count.toString(),
+                        a.toString(),
                         style:
                             const TextStyle(fontSize: 33, color: Colors.white),
                       ),
@@ -180,7 +186,11 @@ class _TaskItemState extends State<TaskItem> {
                       width: 4,
                     ),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        setState(() {
+                          a++;
+                        });
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),

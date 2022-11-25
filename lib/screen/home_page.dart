@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:ecommerceapp/data/database/local_database.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
+import 'package:ecommerceapp/screen/secondPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -88,19 +89,14 @@ class _HomePageState extends State<HomePage> {
     return Padding(
       padding: const EdgeInsets.all(12),
       child: GestureDetector(
-        onTap: () {
-          var modelToDB = Model(
-              id: id,
-              title: title,
-              price: price,
-              description: description,
-              category: category,
-              image: image);
-          setState(() {
-            LocalDatabase.insertToDatabase(modelToDB);
-
-          });
-        },
+        onTap: (() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => SecondPage(
+                        id1: id-=1,
+                      )));
+        }),
         child: Container(
           decoration: BoxDecoration(
               color: Colors.white,

@@ -32,26 +32,27 @@ class _TabBarPageState extends State<TabBarPage> {
           
           
           bottom: TabBar(
-            unselectedLabelColor: Colors.black,
+            unselectedLabelColor: Colors.white,
             labelColor: Colors.deepPurple,
+            isScrollable: true,
 
 
             indicatorColor: Colors.deepPurple,
             tabs: [
               const  Tab(
-              icon: Text('All')
+              icon: Text('All',style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[0])
+              icon: Text(Category.CategoryList[0],style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[1])
+              icon: Text(Category.CategoryList[1],style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[2])
+              icon: Text(Category.CategoryList[2],style: TextStyle(fontSize: 20),)
             ),
             Tab(
-              icon: Text(Category.CategoryList[3])
+              icon: Text(Category.CategoryList[3],style: TextStyle(fontSize: 20),)
             ),
           ]),
         ),

@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'dart:convert';
 import 'package:ecommerceapp/data/model/category_model.dart';
 import 'package:ecommerceapp/data/model/product_model.dart';
+import 'package:ecommerceapp/screen/secondPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -42,118 +43,126 @@ class _ElectronicState extends State<Electronic> {
     var width1 = MediaQuery.of(context).size.width;
     return Scaffold(
         body: Container(
-      child: FutureBuilder<List<Model>?>(
-          future: getResult,
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Model>?> snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Container(
-                height: MediaQuery.of(context).size.height,
-                child: const Center(child: CircularProgressIndicator()),
-              );
-            }
-            if (snapshot.hasError) {
-              return Center(child: Text(snapshot.error.toString()));
-            }
-            if (snapshot.hasData) {
-              List<Model?>? users = snapshot.data;
-              print(snapshot.data![0].category);
+          child: FutureBuilder<List<Model>?>(
+              future: getResult,
+              builder:
+                  (BuildContext context, AsyncSnapshot<List<Model>?> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height,
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+                if (snapshot.hasError) {
+                  return Center(child: Text(snapshot.error.toString()));
+                }
+                if (snapshot.hasData) {
+                  List<Model?>? users = snapshot.data;
 
-              return Container(
-                child: GridView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    gridDelegate:
+                  return Container(
+                    child: GridView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2),
-                    itemCount: users!.length,
-                    itemBuilder: (context, index) {
-                      return stuff(
-                          context,
-                          users[index]?.id ?? 0,
-                          users[index]?.title ?? "NO",
-                          users[index]?.price ?? 0.0,
-                          users[index]?.description ?? "NO",
-                          users[index]?.category ?? "NO",
-                          users[index]?.image ?? "NO");
-                    }),
-              );
-            }
-            return Container(
-              color: Colors.red,
-            );
-          }),
-    ));
+                        itemCount: users!.length,
+                        itemBuilder: (context, index) {
+                          return stuff(
+                              context,
+                              users[index]?.id ?? 0,
+                              users[index]?.title ?? "NO",
+                              users[index]?.price ?? 0.0,
+                              users[index]?.description ?? "NO",
+                              users[index]?.category ?? "NO",
+                              users[index]?.image ?? "NO");
+                        }),
+                  );
+                }
+                return Container();
+              }),
+        ));
   }
 
   stuff(context, id, title, price, description, category, image) {
     var height1 = MediaQuery.of(context).size.height;
     var width1 = MediaQuery.of(context).size.width;
+
     return Padding(
       padding: const EdgeInsets.all(12),
-      child: Container(
-        decoration: BoxDecoration(
-            color: Colors.white,
-            boxShadow: const [
-              BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(1, 1),
-                  blurRadius: 2,
-                  spreadRadius: 2)
-            ],
-            borderRadius: BorderRadius.circular(15)),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                height: 100,
-                width: 100,
-                child: Image.network(
-                  image,
-                  width: 220,
+      child: GestureDetector(
+        onTap: (() {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (_) => SecondPage(
+                    id1: id-=1,
+                  )));
+        }),
+        child: Container(
+          decoration: BoxDecoration(
+              color: Colors.white,
+              boxShadow: const [
+                BoxShadow(
+                    color: Colors.grey,
+                    offset: Offset(1, 1),
+                    blurRadius: 2,
+                    spreadRadius: 2)
+              ],
+              borderRadius: BorderRadius.circular(15)),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              SizedBox(height: height1 * 0.01),
-              Center(
-                child: Container(
-                    alignment: Alignment.center,
-                    child: Text(
-                      title,
-                      maxLines: 1,
-                      style: const TextStyle(fontWeight: FontWeight.w700),
-                    )),
-              ),
-              SizedBox(height: height1 * 0.01),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 10),
-                    child: Container(
-                        child: Text(
-                      category,
-                      maxLines: 1,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, color: Colors.black54),
-                    )),
+                Container(
+                  height: 100,
+                  width: 100,
+                  child: Image.network(
+                    image,
+                    width: 220,
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Container(
-                        child: Text(
-                      "\$ $price",
-                      maxLines: 1,
-                      style: const TextStyle(
-                          fontWeight: FontWeight.w700, color: Colors.black54),
-                    )),
-                  ),
-                ],
-              ),
-            ]),
+                ),
+                SizedBox(height: height1 * 0.01),
+                Center(
+                  child: Container(
+                      alignment: Alignment.center,
+                      child: Text(
+                        title,
+                        maxLines: 1,
+                        style: const TextStyle(fontWeight: FontWeight.w700),
+                      )),
+                ),
+                SizedBox(height: height1 * 0.01),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Container(
+                          child: Text(
+                            category,
+                            maxLines: 1,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w700, color: Colors.black54),
+                          )),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: Container(
+                          child: Text(
+                            "\$ $price",
+                            maxLines: 1,
+                            style: const TextStyle(
+                                fontWeight: FontWeight.w700, color: Colors.black54),
+                          )),
+                    ),
+                  ],
+                ),
+              ]),
+        ),
       ),
     );
   }
